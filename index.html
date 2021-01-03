@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<title>Shopping List</title>
+		<!-- Favicon -->
+		<link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+		<!-- Font Awesome -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+		/>
+		<!-- Google Fonts Roboto -->
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+		/>
+		<!-- Main css file -->
+		<!-- <link rel="stylesheet" href="css/index.min.css" /> -->
+	</head>
+
+	<body>
+		<!-- Start your project here-->
+		<main class="container mt-5">
+			<header class="row align-items-center">
+				<h1 class="col-6 display-5">Lista zakupów:</h1>
+				<p class="invisible col-3 note text-muted note-success notification"> zapisano </p>
+				<button class="col-2 btn btn-outline-success btn__save text-center noPrint">Zapisz</button>
+			</header>
+			<ul class="list-group text-center">
+				<li class="list-group-item d-flex justify-content-around align-items-center active">
+					<span class="item__name col-6">Nazwa</span>
+					<span class="item__group col-3">Kategoria</span>
+					<span class="item__count col-2">Ilość</span>
+					<span class="col-1 noPrint">Usuń</span>
+				</li>
+			</ul>
+			<!-- modal -->
+			<div class="container-xl mt-2">
+				<div class="row d-flex justify-content-between">
+					<button
+						type="button"
+						class="col-6 col-md-2 btn btn-success noPrint"
+						data-mdb-toggle="modal"
+						data-mdb-target="#formModal"
+					>
+						Dodaj nowy produkt
+					</button>
+
+					<h2 class="col-6 col-md-4">
+						<span class="badge bg-info items__summary"> </span>
+					</h2>
+				</div>
+			</div>
+
+			<div
+				class="modal fade"
+				id="formModal"
+				tabindex="-1"
+				aria-labelledby="formModal"
+				aria-hidden="true"
+			>
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Dodaj nowy produkt do listy</h5>
+							<button
+								type="button"
+								class="btn-close"
+								data-mdb-dismiss="modal"
+								aria-label="Close"
+							></button>
+						</div>
+						<div class="modal-body">
+							<form id="form" class="row gy-2 gx-3 align-items-center">
+								<div class="col-auto">
+									<div class="form-outline">
+										<input
+											type="text"
+											id="nameInput"
+											class="form-control"
+											value=""
+											name="name"
+											required
+										/>
+										<label class="form-label" for="nameInput">wprowadź produkt</label>
+									</div>
+								</div>
+								<div class="col-auto">
+									<div class="form-outline">
+										<input
+											type="number"
+											id="quantityInput"
+											class="form-control"
+											value=""
+											name="name"
+											step="0.1"
+											required
+										/>
+										<label class="form-label" for="quantityInput">wprowadź ilość</label>
+									</div>
+								</div>
+								<div class="col-auto">
+									<select
+										class="form-outlinecustom-select"
+										name="category"
+										id="categoryInput"
+										required
+									>
+										<option selected value="">Wybierz...</option>
+										<option value="bread">Pieczywo</option>
+										<option value="dairy">Nabiał</option>
+										<option value="sweets">Słodycze</option>
+										<option value="fruits">Owoce</option>
+										<option value="chemicals">Chemia</option>
+										<option value="cosmetics">Kosmetyki</option>
+										<option value="other">Inne</option>
+									</select>
+									<label class="form-label" for="categoryInput">wybierz kategorię</label>
+								</div>
+								<div class="col-auto">
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="radio"
+											name="unit"
+											id="inputKilo"
+											value="kg"
+											required
+										/>
+										<label class="form-check-label" for="inputKilo"> kilogramy </label>
+									</div>
+									<div class="form-check">
+										<input
+											class="form-check-input"
+											type="radio"
+											name="unit"
+											id="inputItems"
+											value="szt."
+											checked
+										/>
+										<label class="form-check-label" for="inputItems"> sztuki </label>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+										Zamknij
+									</button>
+									<button type="submit" class="btn btn-success">Dodaj</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<!-- end of modal -->
+				</div>
+			</div>
+		</main>
+		<footer
+			class="container position-fixed fixed-bottom align-items-center justify-content-center border-top"
+		>
+			<div class="d-flex row mt-4 text-center">
+				<div class="h3 col-6 col-md-3 offset-lg-3">
+					Razem sztuk:
+					<span class="badge bg-dark sum__items"></span>
+				</div>
+				<div class="h3 col-6 col-md-3">
+					Razem kg:
+					<span class="badge bg-dark sum__kilos"></span>
+				</div>
+				<button
+					class="col-4 col-md-2 btn btn-outline-dark offset-4 offset-md-0 mb-5 btn__print noPrint"
+				>
+					Drukuj
+				</button>
+			</div>
+		</footer>
+		<!-- print button -->
+
+		<!-- <script type="text/javascript" src="js/index.min.js"></script> -->
+	</body>
+	<!-- Main js file -->
+</html>
