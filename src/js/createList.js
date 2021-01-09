@@ -35,7 +35,7 @@ export const productBlueprint = ({ name, category, quantity, unit, id }) => {
       <span class="item__unit">${unit}</span>
       </span>
 
-     <button value=${id} class="item__delete bg-danger badge col-1 ms-2 noPrint" role="button" 
+     <button value=${id} class="item__delete bg-danger badge col-1 ms-1 px-1 noPrint text-center" role="button" 
      
       ><i class="far fa-trash-alt"></i
       ></button>

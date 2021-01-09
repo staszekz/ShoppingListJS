@@ -24,7 +24,7 @@
 		<main class="container mt-5">
 			<header class="row align-items-center">
 				<h1 class="col-6 display-5">Lista zakupów:</h1>
-				<p class="invisible col-3 note text-muted note-success notification"> zapisano </p>
+				<p class="invisible col-3 alert text-muted alert-success notification"> zapisano </p>
 				<button class="col-2 btn btn-outline-success btn__save text-center noPrint">Zapisz</button>
 			</header>
 			<ul class="list-group text-center">
@@ -46,11 +46,8 @@
 					>
 						Dodaj nowy produkt
 					</button>
-
-					<h2 class="col-6 col-md-4">
-						<span class="badge bg-info items__summary"> </span>
-					</h2>
-				</div>
+					<span class="col-5 col-md-3 badge bg-info items__summary d-flex align-items-center justify-content-center"></span>
+					</div>
 			</div>
 
 			<div
@@ -68,7 +65,7 @@
 							<button
 								type="button"
 								class="btn-close"
-								data-dismiss="modal"
+								data-bs-dismiss="modal"
 								aria-label="Close"
 							></button>
 						</div>
@@ -144,7 +141,7 @@
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
 										Zamknij
 									</button>
 									<button type="submit" class="btn btn-success">Dodaj</button>
@@ -175,11 +172,6 @@
 				</button>
 			</div>
 		</footer>
-		<!-- print button -->
-<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script> -->
-		<!-- <script type="text/javascript" src="js/index.min.js"></script> -->
 	</body>
-	<!-- Main js file -->
+
 </html>

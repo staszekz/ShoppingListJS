@@ -1,5 +1,11 @@
 
+
 @import 'bootstrap';
+
+.items__summary{
+font-size: larger;
+}
+
 @media print {
 	.noPrint {
 		display: none;

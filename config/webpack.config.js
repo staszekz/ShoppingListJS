@@ -2,6 +2,8 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const postcssPresetEnv = require('postcss-preset-env');
+
 // import path from 'path';
 
 module.exports = {
@@ -16,7 +18,7 @@ module.exports = {
 	},
 	devServer: {
 		open: true,
-		contentBase: path.resolve(__dirname, '../public'),
+		contentBase: path.resolve(__dirname, './'),
 	},
 	module: {
 		rules: [
@@ -42,13 +44,13 @@ module.exports = {
 						loader: 'postcss-loader',
 						options: {
 							postcssOptions: {
-								plugins: function () {
-									return [require('autoprefixer')];
+								plugins: [
+									"postcss-preset-env",
+								],
 								},
 							},
 						},
-					},
-
+					
 					'sass-loader',
 				],
 			},
