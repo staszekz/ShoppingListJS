@@ -36,6 +36,7 @@
     "@babel/polyfill": "^7.12.1",
     "@popperjs/core": "^2.6.0",
     "bootstrap": "^5.0.0-beta1",
-    "core-js": "^3.8.2"
+    "core-js": "^3.8.2",
+    "jquery": "^3.5.1"
   }
 }

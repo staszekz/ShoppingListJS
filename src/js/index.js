@@ -1,13 +1,11 @@
-import bootstrap from 'bootstrap';
 import Product from './product';
 // You can specify which plugins you need
-import { Tooltip, Toast, Popover } from 'bootstrap';
+import { Tooltip, Toast, Popover} from 'bootstrap';
 import { productBlueprint, emptyListAlert } from './createList';
 import '../scss/index.scss';
 
-export default {
-	bootstrap,
-};
+
+
 // products list
 let products = [];
 

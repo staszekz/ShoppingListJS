@@ -1,18 +1,18 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // import path from 'path';
 
 module.exports = {
 	mode: 'development',
 	entry: {
 		//  moze być kilka nazw i będzie wtedy tworzył kilka plików
-		main: './src/app.js',
-		// main2: './src/message.js',
+		main: './src/js/index.js',
 	},
 	output: {
-		filename: 'js/[name]-bundle.js', // bierze nazwy z entry, contenthash tylko w produkcyjnej wersji
-		path: path.resolve(__dirname, '../build'),
+		filename: 'js/[name]-bundle.js',
+		path: path.resolve(__dirname, '../dist'),
 	},
 	devServer: {
 		open: true,
@@ -25,12 +25,32 @@ module.exports = {
 				use: 'raw-loader',
 			},
 			{
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader'],
+				test: /\.css$/i,
+				use: [MiniCssExtractPlugin.loader, 'css-loader'],
 			},
 			{
-				test: /\.(scss|sass)$/,
-				use: ['style-loader', 'css-loader', 'sass-loader'],
+				test: /\.(scss|sass)$/i,
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader,
+						options: {
+							publicPath: '',
+						},
+					},
+					'css-loader',
+					{
+						loader: 'postcss-loader',
+						options: {
+							postcssOptions: {
+								plugins: function () {
+									return [require('autoprefixer')];
+								},
+							},
+						},
+					},
+
+					'sass-loader',
+				],
 			},
 			{
 				test: /\.(jpg|png|svg|gif|jpeg)$/,
@@ -61,7 +81,10 @@ module.exports = {
 		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
 			title: 'nowa plikacja',
-			template: './src/templates/index.html',
+			template: './index.html',
+		}),
+		new MiniCssExtractPlugin({
+			filename: '[name]-[contenthash:6].css',
 		}),
 	],
 };

@@ -12,17 +12,15 @@
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
 		/>
-		<!-- Google Fonts Roboto -->
+		
 		<link
 			rel="stylesheet"
 			href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
 		/>
-		<!-- Main css file -->
-		<!-- <link rel="stylesheet" href="css/index.min.css" /> -->
+
 	</head>
 
 	<body>
-		<!-- Start your project here-->
 		<main class="container mt-5">
 			<header class="row align-items-center">
 				<h1 class="col-6 display-5">Lista zakupów:</h1>
@@ -43,8 +41,8 @@
 					<button
 						type="button"
 						class="col-6 col-md-2 btn btn-success noPrint"
-						data-mdb-toggle="modal"
-						data-mdb-target="#formModal"
+						data-bs-toggle="modal"
+						data-bs-target="#formModal"
 					>
 						Dodaj nowy produkt
 					</button>
@@ -61,15 +59,16 @@
 				tabindex="-1"
 				aria-labelledby="formModal"
 				aria-hidden="true"
+				role="dialog"
 			>
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title">Dodaj nowy produkt do listy</h5>
+							<h5 class="modal-title" id="formModalLabel">Dodaj nowy produkt do listy</h5>
 							<button
 								type="button"
 								class="btn-close"
-								data-mdb-dismiss="modal"
+								data-dismiss="modal"
 								aria-label="Close"
 							></button>
 						</div>
@@ -145,7 +144,7 @@
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">
 										Zamknij
 									</button>
 									<button type="submit" class="btn btn-success">Dodaj</button>
@@ -177,7 +176,9 @@
 			</div>
 		</footer>
 		<!-- print button -->
-
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script> -->
 		<!-- <script type="text/javascript" src="js/index.min.js"></script> -->
 	</body>
 	<!-- Main js file -->
