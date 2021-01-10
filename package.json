@@ -44,6 +44,8 @@
     "buble": "^0.20.0",
     "buble-loader": "^0.5.1",
     "core-js": "^3.8.2",
+    "firebase": "^8.2.2",
+    "firebaseui": "^4.7.1",
     "jquery": "^3.5.1"
   }
 }

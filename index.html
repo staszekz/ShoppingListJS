@@ -6,6 +6,7 @@
 		<meta http-equiv="x-ua-compatible" content="ie=edge" />
 		<title><%= htmlWebpackPlugin.options.title %></title>
 		<!-- Favicon -->
+
 		<link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
 		<!-- Font Awesome -->
 		<link
@@ -29,7 +30,6 @@
 		<main class="container mt-2">
 			<header class="row d-flex align-items-center">
 				<h1 class="col-6">Lista zakupów:</h1>
-
 				<p class="invisible col-3 alert text-muted alert-success notification"> zapisano </p>
 				<button class="col-2 btn btn-outline-success btn__save text-center noPrint h1"
 					>Zapisz</button
@@ -162,6 +162,11 @@
 					<!-- end of modal -->
 				</div>
 			</div>
+			<form id="logForm">
+				<input type="email" name="email" id="emailLogin" />
+				<input type="password" name="password" id="passwordInput" />
+				<input id="formSubmit" type="submit" value="log" />
+			</form>
 		</main>
 		<footer
 			class="container position-fixed fixed-bottom align-items-center justify-content-center border-top"
