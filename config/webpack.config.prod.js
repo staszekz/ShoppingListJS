@@ -38,10 +38,7 @@ module.exports = {
 						loader: 'postcss-loader',
 						options: {
 							postcssOptions: {
-								// postcss plugins, can be exported to postcss.config.js
-								plugins: function () {
-									return [require('autoprefixer')];
-								},
+								plugins: ['postcss-preset-env'],
 							},
 						},
 					},
@@ -85,10 +82,11 @@ module.exports = {
 								{
 									useBuiltIns: 'usage',
 									corejs: '3',
+									targets: 'defaults',
 								},
 							],
 						],
-						plugins: ['@babel/plugin-proposal-class-properties'],
+						plugins: ['@babel/plugin-transform-runtime'],
 					},
 				},
 			},
@@ -110,6 +108,9 @@ module.exports = {
 					to: 'images',
 				},
 			],
+		}),
+		new CssMinimizerPlugin({
+			test: /\.css$/i,
 		}),
 		// new ImageMinimizerPlugin({
 		// 	minimizerOptions: {

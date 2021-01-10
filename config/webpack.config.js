@@ -2,14 +2,15 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const postcssPresetEnv = require('postcss-preset-env');
+const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+// const postcssPresetEnv = require('postcss-preset-env');
 
 // import path from 'path';
 
 module.exports = {
 	mode: 'development',
 	entry: {
-		//  moze być kilka nazw i będzie wtedy tworzył kilka plików
 		main: './src/js/index.js',
 	},
 	output: {
@@ -18,7 +19,7 @@ module.exports = {
 	},
 	devServer: {
 		open: true,
-		contentBase: path.resolve(__dirname, './'),
+		contentBase: path.resolve(__dirname, './public'),
 	},
 	module: {
 		rules: [
@@ -44,13 +45,11 @@ module.exports = {
 						loader: 'postcss-loader',
 						options: {
 							postcssOptions: {
-								plugins: [
-									"postcss-preset-env",
-								],
-								},
+								plugins: ['postcss-preset-env'],
 							},
 						},
-					
+					},
+
 					'sass-loader',
 				],
 			},
@@ -70,23 +69,36 @@ module.exports = {
 								{
 									useBuiltIns: 'usage',
 									corejs: '3',
+									targets: 'defaults',
 								},
 							],
 						],
-						plugins: ['@babel/plugin-proposal-class-properties'],
+						plugins: ['@babel/plugin-transform-runtime'],
 					},
 				},
 			},
+			// {
+			// 	test: /\.js$/,
+			// 	include: path.resolve(__dirname, 'src/js'),
+			// 	enforce: 'pre',
+			// 	loader: 'eslint-loader',
+			// 	options: {
+			// 		emitWarning: true,
+			// 	},
+			// },
 		],
 	},
 	plugins: [
 		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
-			title: 'nowa plikacja',
+			title: 'shopping list',
 			template: './index.html',
 		}),
 		new MiniCssExtractPlugin({
-			filename: '[name]-[contenthash:6].css',
+			filename: '[name]-[contenthash:6].min.css',
+		}),
+		new CssMinimizerPlugin({
+			test: /\.css$/i,
 		}),
 	],
 };

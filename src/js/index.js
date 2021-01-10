@@ -1,14 +1,12 @@
 import Product from './product';
 // You can specify which plugins you need
-import { Tooltip, Toast, Popover} from 'bootstrap';
+import { Tooltip, Toast, Popover } from 'bootstrap';
 import { productBlueprint, emptyListAlert } from './createList';
 import '../scss/index.scss';
 
-
-
 // products list
 let products = [];
-
+console.log('prod', products);
 // catching things
 const summary = document.querySelector('.items__summary');
 const form = document.querySelector('#form');

@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<meta http-equiv="x-ua-compatible" content="ie=edge" />
-		<title>Shopping List</title>
+		<title><%= htmlWebpackPlugin.options.title %></title>
 		<!-- Favicon -->
 		<link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
 		<!-- Font Awesome -->
@@ -12,20 +12,28 @@
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
 		/>
-		
+
 		<link
 			rel="stylesheet"
 			href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
 		/>
-
 	</head>
 
 	<body>
-		<main class="container mt-5">
-			<header class="row align-items-center">
-				<h1 class="col-6 display-5">Lista zakupów:</h1>
+		<nav class="navbar sticky-top navbar-light bg-dark">
+			<div class="container-fluid d-flex justify-content-end">
+				<a class="text-warning navbar-brand text-right" href="#">LogIn</a>
+				<a class="text-warning navbar-brand text-right" href="#">SignUp</a>
+			</div>
+		</nav>
+		<main class="container mt-2">
+			<header class="row d-flex align-items-center">
+				<h1 class="col-6">Lista zakupów:</h1>
+
 				<p class="invisible col-3 alert text-muted alert-success notification"> zapisano </p>
-				<button class="col-2 btn btn-outline-success btn__save text-center noPrint">Zapisz</button>
+				<button class="col-2 btn btn-outline-success btn__save text-center noPrint h1"
+					>Zapisz</button
+				>
 			</header>
 			<ul class="list-group text-center">
 				<li class="list-group-item d-flex justify-content-around align-items-center active">
@@ -46,8 +54,10 @@
 					>
 						Dodaj nowy produkt
 					</button>
-					<span class="col-5 col-md-3 badge bg-info items__summary d-flex align-items-center justify-content-center"></span>
-					</div>
+					<span
+						class="col-5 col-md-3 badge bg-info items__summary d-flex align-items-center justify-content-center"
+					></span>
+				</div>
 			</div>
 
 			<div
@@ -173,5 +183,4 @@
 			</div>
 		</footer>
 	</body>
-
 </html>
