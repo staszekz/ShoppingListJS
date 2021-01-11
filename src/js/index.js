@@ -1,7 +1,7 @@
 import Product from './product';
 // import * as auth from './auth';
 import './auth';
-// import './loginui';
+import './loginui';
 // You can specify which plugins you need
 import { Tooltip, Toast, Popover } from 'bootstrap';
 import { productBlueprint, emptyListAlert } from './createList';

@@ -19,15 +19,47 @@ console.log(firebase);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-const logBtn = document.querySelector('#logForm');
-logBtn.addEventListener('submit', e => {
+const signForm = document.querySelector('#signForm');
+signForm.addEventListener('submit', e => {
 	e.preventDefault();
 
-	const email = logBtn['emailLogin'].value;
-	const password = logBtn['passwordInput'].value;
+	const email = signForm['emailToSignIn'].value;
+	const password = signForm['passwordToSignIn'].value;
 	console.log(email, password);
 
 	auth.createUserWithEmailAndPassword(email, password).then(cred => {
 		console.log('cred', cred);
 	});
+});
+
+// logout
+// const logoutBtn = document.querySelector('#logout-btn');
+const loginBtn = document.querySelector('.login-btn');
+const logoutBtn = document.querySelector('.logout-btn');
+const signinBtn = document.querySelector('.signin-btn');
+
+logoutBtn.addEventListener('click', e => {
+	e.preventDefault();
+	auth.signOut().then(() => console.log('user loged out'));
+	console.log('btn', loginBtn, logoutBtn, signinBtn);
+});
+
+// log in
+
+const logForm = document.querySelector('#logForm');
+logForm.addEventListener('submit', e => {
+	e.preventDefault();
+
+	const email = logForm['emailToLogIn'].value;
+	const password = logForm['passwordToLogIn'].value;
+	console.log(email, password);
+
+	auth
+		.signInWithEmailAndPassword(email, password)
+		.then(cred => console.log('logged', cred.user))
+		.then(() => {
+			logoutBtn.classList.toggle('d-block');
+			loginBtn.classList.toggle('d-none');
+			signinBtn.classList.toggle('d-none');
+		});
 });

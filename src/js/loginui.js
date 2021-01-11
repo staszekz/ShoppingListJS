@@ -1,6 +1,16 @@
 import firebase from 'firebase';
-import firebaseui from 'firebaseui';
+import './auth';
+import { auth as authui } from 'firebaseui';
 
-const ui = new firebaseui.auth.AuthUI(firebase.auth());
+const ui = new authui.AuthUI(firebase.auth());
+
+ui.start('#firebaseui-auth-container', {
+	signInOptions: [
+		{
+			provider: firebase.auth.EmailAuthProvider.password,
+			requireDisplayName: false,
+		},
+	],
+});
 
 console.log('ui', ui);

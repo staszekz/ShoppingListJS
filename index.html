@@ -23,8 +23,15 @@
 	<body>
 		<nav class="navbar sticky-top navbar-light bg-dark">
 			<div class="container-fluid d-flex justify-content-end">
-				<a class="text-warning navbar-brand text-right" href="#">LogIn</a>
-				<a class="text-warning navbar-brand text-right" href="#">SignUp</a>
+				<button class="btn text-warning navbar-brand text-right d-block login-btn" id="login-btn"
+					>LogIn</button
+				>
+				<button class="btn text-success navbar-brand text-right d-block signup-btn" id="signup-btn"
+					>SignUp</button
+				>
+				<button class="btn text-danger navbar-brand text-right d-none logout-btn" id="logout-btn"
+					>Log Out</button
+				>
 			</div>
 		</nav>
 		<main class="container mt-2">
@@ -162,11 +169,23 @@
 					<!-- end of modal -->
 				</div>
 			</div>
-			<form id="logForm">
-				<input type="email" name="email" id="emailLogin" />
-				<input type="password" name="password" id="passwordInput" />
-				<input id="formSubmit" type="submit" value="log" />
+			<h1 class="mt-5">Sign In</h1>
+			<form id="signForm">
+				<input type="text" name="nameToSignIn" id="nameToSignIn" />
+				<input type="email" name="emailToSignIn" id="emailToSignIn" />
+				<input type="password" name="passwordToSignIn" id="passwordToSignIn" />
+				<input class="btn btn-success" id="formSubmit" type="submit" value="sign" />
 			</form>
+			<h1 class="mt-5">log In</h1>
+			<form id="logForm">
+				<input type="text" name="nameToLogIn" id="nameToLogIn" />
+				<input type="email" name="emailToLogIn" id="emailToLogIn" />
+				<input type="password" name="passwordToLogIn" id="passwordToLogIn" />
+				<input class="btn btn-success" id="logSubmit" type="submit" value="log" />
+			</form>
+
+			<div id="firebaseui-auth-container"></div>
+			<!-- <div id="loader">Loading...</div> -->
 		</main>
 		<footer
 			class="container position-fixed fixed-bottom align-items-center justify-content-center border-top"
