@@ -236,18 +236,30 @@
 								<label for="nameToLogIn"> Name</label>
 								<input class="form-control" type="text" name="nameToLogIn" id="nameToLogIn" />
 								<label for="emailToLogIn">E-mail</label>
-								<input class="form-control" type="email" name="emailToLogIn" id="emailToLogIn" />
+								<input
+									class="form-control"
+									required
+									type="email"
+									name="emailToLogIn"
+									id="emailToLogIn"
+								/>
 								<label for="passwordToLogIn">Password</label>
 								<input
 									class="form-control"
 									type="password"
 									name="passwordToLogIn"
 									id="passwordToLogIn"
+									required
 								/>
-								<input class="btn btn-success" id="logSubmit" type="submit" value="LogIn" />
+
+								<input class="btn btn-success mt-2" id="logSubmit" type="submit" value="LogIn" />
+								<div class="alert alert-success d-none" id="loggedInAlert">Logged In</div>
 							</form>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+								<button
+									type="button"
+									class="btn btn-outline-secondary closeBtn"
+									data-bs-dismiss="modal"
 									>Close</button
 								>
 							</div>
