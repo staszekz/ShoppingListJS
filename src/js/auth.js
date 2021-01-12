@@ -36,11 +36,20 @@ signForm.addEventListener('submit', e => {
 // const logoutBtn = document.querySelector('#logout-btn');
 const loginBtn = document.querySelector('.login-btn');
 const logoutBtn = document.querySelector('.logout-btn');
-const signinBtn = document.querySelector('.signin-btn');
+const signinBtn = document.querySelector('.signup-btn');
+
+const toggleLogingBtns = () => {
+	logoutBtn.classList.toggle('d-none');
+	loginBtn.classList.toggle('d-none');
+	signinBtn.classList.toggle('d-none');
+};
 
 logoutBtn.addEventListener('click', e => {
 	e.preventDefault();
-	auth.signOut().then(() => console.log('user loged out'));
+	auth
+		.signOut()
+		.then(() => console.log('user loged out'))
+		.then(() => toggleLogingBtns());
 	console.log('btn', loginBtn, logoutBtn, signinBtn);
 });
 
@@ -58,8 +67,6 @@ logForm.addEventListener('submit', e => {
 		.signInWithEmailAndPassword(email, password)
 		.then(cred => console.log('logged', cred.user))
 		.then(() => {
-			logoutBtn.classList.toggle('d-block');
-			loginBtn.classList.toggle('d-none');
-			signinBtn.classList.toggle('d-none');
+			toggleLogingBtns();
 		});
 });
