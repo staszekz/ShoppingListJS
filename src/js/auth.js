@@ -1,4 +1,6 @@
 import firebase from 'firebase/app';
+// import bootstrap from 'bootstrap.esm.js ';
+import { hide } from 'bootstrap';
 import 'firebase/auth';
 import 'firebase/analytics';
 import 'firebase/firestore';
@@ -14,7 +16,6 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-console.log(firebase);
 
 const auth = firebase.auth();
 const db = firebase.firestore();
@@ -33,40 +34,62 @@ signForm.addEventListener('submit', e => {
 });
 
 // logout
-// const logoutBtn = document.querySelector('#logout-btn');
 const loginBtn = document.querySelector('.login-btn');
 const logoutBtn = document.querySelector('.logout-btn');
-const signinBtn = document.querySelector('.signup-btn');
+const signupBtn = document.querySelector('.signup-btn');
+const navSpinner = document.querySelector('.render');
 
-const toggleLogingBtns = () => {
-	logoutBtn.classList.toggle('d-none');
-	loginBtn.classList.toggle('d-none');
-	signinBtn.classList.toggle('d-none');
+const setupLoginBtns = user => {
+	if (user) {
+		logoutBtn.classList.remove('d-none');
+		loginBtn.classList.add('d-none');
+		signupBtn.classList.add('d-none');
+	} else {
+		logoutBtn.classList.add('d-none');
+		loginBtn.classList.remove('d-none');
+		signupBtn.classList.remove('d-none');
+	}
 };
 
 logoutBtn.addEventListener('click', e => {
 	e.preventDefault();
-	auth
-		.signOut()
-		.then(() => console.log('user loged out'))
-		.then(() => toggleLogingBtns());
-	console.log('btn', loginBtn, logoutBtn, signinBtn);
+	auth.signOut();
 });
 
 // log in
+const myModal = document.getElementById('loginModal');
 
-const logForm = document.querySelector('#logForm');
+const logForm = document.getElementById('logForm');
 logForm.addEventListener('submit', e => {
 	e.preventDefault();
-
+	console.log('clicked');
+	// myModal.modal('hide');
 	const email = logForm['emailToLogIn'].value;
 	const password = logForm['passwordToLogIn'].value;
 	console.log(email, password);
 
-	auth
-		.signInWithEmailAndPassword(email, password)
-		.then(cred => console.log('logged', cred.user))
-		.then(() => {
-			toggleLogingBtns();
-		});
+	auth.signInWithEmailAndPassword(email, password);
+});
+
+const toRender = document.querySelector('.render');
+
+const renderBtns = () => {
+	logoutBtn.classList.remove('invisible');
+	loginBtn.classList.remove('invisible');
+	signupBtn.classList.remove('invisible');
+	navSpinner.classList.add('invisible');
+	console.log('render btns');
+};
+
+// listen to user status
+auth.onAuthStateChanged(user => {
+	console.log('change', user);
+	renderBtns();
+	if (user) {
+		setupLoginBtns(user);
+		console.log('logged user', user.email);
+	} else {
+		setupLoginBtns();
+		console.log('logged out', user);
+	}
 });

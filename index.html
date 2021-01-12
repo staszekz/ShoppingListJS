@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<meta http-equiv="x-ua-compatible" content="ie=edge" />
-		<title><%= htmlWebpackPlugin.options.title %></title>
+		<title> <%= htmlWebpackPlugin.options.title %> </title>
 		<!-- Favicon -->
 
 		<link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
@@ -22,21 +22,39 @@
 
 	<body>
 		<nav class="navbar sticky-top navbar-light bg-dark">
-			<div class="container-fluid d-flex justify-content-end">
-				<button class="btn text-warning navbar-brand text-right login-btn" id="login-btn"
+			<div class="container-fluid d-flex justify-content-end align-items-center">
+				<h1 class="col-4 col-md-6 text-light flex-grow-1 text-center text-sm-start"
+					>Lista zakupów:</h1
+				>
+
+				<div class="render d-flex justify-content-center">
+					<div class="spinner-grow text-warning" role="status">
+						<span class="visually-hidden">Loading...</span>
+					</div>
+				</div>
+				<button
+					class="btn text-warning navbar-brand text-right d-none login-btn invisible"
+					id="login-btn"
+					data-bs-toggle="modal"
+					data-bs-target="#loginModal"
 					>LogIn</button
 				>
-				<button class="btn text-success navbar-brand text-right signup-btn" id="signup-btn"
+				<button
+					class="btn text-success navbar-brand d-none text-right signup-btn invisible"
+					id="signup-btn"
+					data-bs-toggle="modal"
+					data-bs-target="#signupModal"
 					>SignUp</button
 				>
-				<button class="btn text-danger navbar-brand text-right d-none logout-btn" id="logout-btn"
+				<button
+					class="btn text-danger navbar-brand d-none text-right d-none logout-btn invisible"
+					id="logout-btn"
 					>Log Out</button
 				>
 			</div>
 		</nav>
-		<main class="container mt-2">
-			<header class="row d-flex align-items-center">
-				<h1 class="col-6">Lista zakupów:</h1>
+		<main class="container mt-2 mb-auto">
+			<header class="row d-flex align-items-center justify-content-end me-1">
 				<p class="invisible col-3 alert text-muted alert-success notification"> zapisano </p>
 				<button class="col-2 btn btn-outline-success btn__save text-center noPrint h1"
 					>Zapisz</button
@@ -73,7 +91,6 @@
 				tabindex="-1"
 				aria-labelledby="formModal"
 				aria-hidden="true"
-				role="dialog"
 			>
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
@@ -169,27 +186,78 @@
 					<!-- end of modal -->
 				</div>
 			</div>
-			<h1 class="mt-5">Sign In</h1>
-			<form id="signForm">
-				<input type="text" name="nameToSignIn" id="nameToSignIn" />
-				<input type="email" name="emailToSignIn" id="emailToSignIn" />
-				<input type="password" name="passwordToSignIn" id="passwordToSignIn" />
-				<input class="btn btn-success" id="formSubmit" type="submit" value="sign" />
-			</form>
-			<h1 class="mt-5">log In</h1>
-			<form id="logForm">
-				<input type="text" name="nameToLogIn" id="nameToLogIn" />
-				<input type="email" name="emailToLogIn" id="emailToLogIn" />
-				<input type="password" name="passwordToLogIn" id="passwordToLogIn" />
-				<input class="btn btn-success" id="logSubmit" type="submit" value="log" />
-			</form>
 
+			<div
+				class="modal fade"
+				id="signupModal"
+				tabindex="-1"
+				aria-labelledby="signupModal"
+				aria-hidden="true"
+			>
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="mt-5">Sign In</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+							</button>
+						</div>
+						<div class="modal-body">
+							<form id="signForm">
+								<input type="text" name="nameToSignIn" id="nameToSignIn" />
+								<input type="email" name="emailToSignIn" id="emailToSignIn" />
+								<input type="password" name="passwordToSignIn" id="passwordToSignIn" />
+								<input class="btn btn-success" id="formSubmit" type="submit" value="sign" />
+							</form>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+									>Close</button
+								>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div
+				class="modal fade"
+				id="loginModal"
+				tabindex="-1"
+				aria-labelledby="loginModal"
+				aria-hidden="true"
+			>
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title" id="loginModalTitle">Please Log In</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+							</button>
+						</div>
+						<div class="modal-body">
+							<form id="logForm">
+								<label for="nameToLogIn"> Name</label>
+								<input class="form-control" type="text" name="nameToLogIn" id="nameToLogIn" />
+								<label for="emailToLogIn">E-mail</label>
+								<input class="form-control" type="email" name="emailToLogIn" id="emailToLogIn" />
+								<label for="passwordToLogIn">Password</label>
+								<input
+									class="form-control"
+									type="password"
+									name="passwordToLogIn"
+									id="passwordToLogIn"
+								/>
+								<input class="btn btn-success" id="logSubmit" type="submit" value="LogIn" />
+							</form>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+									>Close</button
+								>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div id="firebaseui-auth-container"></div>
-			<!-- <div id="loader">Loading...</div> -->
 		</main>
-		<footer
-			class="container position-fixed fixed-bottom align-items-center justify-content-center border-top"
-		>
+		<footer class="footer border-top container position-fixed sticky-bottom bottom-0 mt-auto">
 			<div class="d-flex row mt-4 text-center">
 				<div class="h3 col-6 col-md-3 offset-lg-3">
 					Razem sztuk:
