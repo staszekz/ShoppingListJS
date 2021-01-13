@@ -55,14 +55,17 @@
 		</nav>
 		<main class="container-lg mt-2 pb-2">
 			<header class="row d-flex align-items-center justify-content-end me-1">
+				<div class="lead col-2 text-center border border-warning rounded user__name">Guest</div>
 				<p class="invisible col-3 alert text-muted alert-success notification"> saved </p>
-				<button class="col-2 btn btn-outline-info btn__load text-center noPrint h1 me-1"
+				<button class="col-2 btn btn-outline-info btn__load text-center noPrint h1 me-1" disabled
 					>Load</button
 				>
-				<button class="col-2 btn btn-outline-danger btn__reset text-center noPrint h1 me-1"
+				<button class="col-2 btn btn-outline-danger btn__reset text-center noPrint h1 me-1" disabled
 					>Reset</button
 				>
-				<button class="col-2 btn btn-outline-success btn__save text-center noPrint h1">Save</button>
+				<button class="col-2 btn btn-outline-success btn__save text-center noPrint h1" disabled
+					>Save</button
+				>
 			</header>
 			<ul class="list-group text-center">
 				<li class="list-group-item d-flex justify-content-around align-items-center active">
@@ -237,8 +240,8 @@
 						</div>
 						<div class="modal-body">
 							<form id="logForm">
-								<label for="nameToLogIn"> Name</label>
-								<input class="form-control" type="text" name="nameToLogIn" id="nameToLogIn" />
+								<!-- <label for="nameToLogIn"> Name</label>
+								<input class="form-control" type="text" name="nameToLogIn" id="nameToLogIn" /> -->
 								<label for="emailToLogIn">E-mail</label>
 								<input
 									class="form-control"
@@ -277,15 +280,16 @@
 			class="bg-warning container-fluid position-fixed d-flex flex-column justify-content-center bottom-0"
 		>
 			<div class="d-flex row text-center justify-content-center align-items-center">
-				<div class="h5 col-6 col-sm-3 offset-lg-3">
+				<div class="h5 col-6 col-sm-4 col-lg-2 offset-lg-2">
 					Items:
 					<span class="badge bg-dark sum__items"></span>
 				</div>
-				<div class="h5 col-6 col-sm-3">
+				<div class="h5 col-6 col-sm-4 col-lg-2">
 					Weight:
 					<span class="badge bg-dark sum__kilos"></span>
+					kg
 				</div>
-				<button class="col-2 col-sm-2 btn btn-outline-dark offset-md-0 btn__print noPrint">
+				<button class="col-4 col-sm-2 col-lg-1 btn btn-outline-dark offset-md-0 btn__print noPrint">
 					Print
 				</button>
 			</div>

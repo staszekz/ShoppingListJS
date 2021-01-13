@@ -1,7 +1,7 @@
 import Product from './product';
 // import * as auth from './auth';
 import { Tooltip, Toast, Popover } from 'bootstrap';
-
+import './cssEffects';
 import './auth';
 import './loginui';
 // You can specify which plugins you need
@@ -10,13 +10,12 @@ import '../scss/index.scss';
 
 // products list
 let products = [];
-console.log('prod', products);
 // catching things
 const summary = document.querySelector('.items__summary');
 const form = document.querySelector('#form');
-const saveBtn = document.querySelector('.btn__save');
-const resetBtn = document.querySelector('.btn__reset');
-const loadBtn = document.querySelector('.btn__load');
+export const saveBtn = document.querySelector('.btn__save');
+export const resetBtn = document.querySelector('.btn__reset');
+export const loadBtn = document.querySelector('.btn__load');
 const notification = document.querySelector('.notification');
 const btnPrint = document.querySelector('.btn__print');
 const sumItemsPlace = document.querySelector('.sum__items');

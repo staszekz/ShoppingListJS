@@ -4,6 +4,7 @@ import { hide } from 'bootstrap';
 import 'firebase/auth';
 import 'firebase/analytics';
 import 'firebase/firestore';
+import { resetBtn, saveBtn, loadBtn } from './index';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyBh1FUATgC4cxDngnk084fSC9CRb9383EY',
@@ -32,24 +33,31 @@ signForm.addEventListener('submit', e => {
 
 	const email = signForm['emailToSignIn'].value;
 	const password = signForm['passwordToSignIn'].value;
-	console.log(email, password);
+	const name = signForm['nameToSignIn'].value;
+
+	console.log(name, email, password);
 
 	auth.createUserWithEmailAndPassword(email, password).then(cred => {
-		console.log('cred', cred);
+		cred.user.updateProfile({
+			displayName: name,
+		});
 	});
 });
 
 // logout
-
+const userName = document.querySelector('.user__name');
 const setupLoginBtns = user => {
 	if (user) {
 		logoutBtn.classList.remove('d-none');
 		loginBtn.classList.add('d-none');
 		signupBtn.classList.add('d-none');
+		console.log(user.displayName);
+		userName.innerText = user.displayName;
 	} else {
 		logoutBtn.classList.add('d-none');
 		loginBtn.classList.remove('d-none');
 		signupBtn.classList.remove('d-none');
+		userName.innerText = 'Guest';
 	}
 };
 
@@ -68,7 +76,6 @@ logForm.addEventListener('submit', e => {
 	e.preventDefault();
 	const email = logForm['emailToLogIn'].value;
 	const password = logForm['passwordToLogIn'].value;
-
 	auth
 		.signInWithEmailAndPassword(email, password)
 		.then(() => {
@@ -84,6 +91,9 @@ const renderBtns = () => {
 	loginBtn.classList.remove('invisible');
 	signupBtn.classList.remove('invisible');
 	navSpinner.classList.add('invisible');
+	resetBtn.removeAttribute('disabled');
+	loadBtn.removeAttribute('disabled');
+	saveBtn.removeAttribute('disabled');
 };
 
 // listen to user status
