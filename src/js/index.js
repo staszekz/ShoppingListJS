@@ -15,6 +15,8 @@ console.log('prod', products);
 const summary = document.querySelector('.items__summary');
 const form = document.querySelector('#form');
 const saveBtn = document.querySelector('.btn__save');
+const resetBtn = document.querySelector('.btn__reset');
+const loadBtn = document.querySelector('.btn__load');
 const notification = document.querySelector('.notification');
 const btnPrint = document.querySelector('.btn__print');
 const sumItemsPlace = document.querySelector('.sum__items');
@@ -116,12 +118,18 @@ const handleLocalStorage = () => {
 
 saveBtn.addEventListener('click', handleLocalStorage);
 
+resetBtn.addEventListener('click', () => {
+	products = [];
+	renderList(products);
+});
+
 const readList = () => {
 	const fromLocalStorage = localStorage.getItem('Shopping List');
 	products = JSON.parse(fromLocalStorage);
 	renderList(products);
 };
 document.onload = readList();
+loadBtn.addEventListener('click', readList);
 
 // printing
 btnPrint.addEventListener('click', () => window.print());
