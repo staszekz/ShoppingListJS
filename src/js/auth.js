@@ -1,10 +1,9 @@
 import firebase from 'firebase/app';
 // import bootstrap from 'bootstrap.esm.js ';
-import { hide } from 'bootstrap';
 import 'firebase/auth';
 import 'firebase/analytics';
 import 'firebase/firestore';
-import { resetBtn, saveBtn, loadBtn } from './index';
+import { resetBtn, saveBtn, loadBtn, btnPrint } from './index';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyBh1FUATgC4cxDngnk084fSC9CRb9383EY',
@@ -94,6 +93,7 @@ const renderBtns = () => {
 	resetBtn.removeAttribute('disabled');
 	loadBtn.removeAttribute('disabled');
 	saveBtn.removeAttribute('disabled');
+	btnPrint.removeAttribute('disabled');
 };
 
 // listen to user status

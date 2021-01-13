@@ -1,6 +1,8 @@
 import Product from './product';
 // import * as auth from './auth';
-import { Tooltip, Toast, Popover } from 'bootstrap';
+import 'bootstrap/js/dist/modal';
+import 'bootstrap/js/dist/button';
+import 'bootstrap/js/dist/alert';
 import './cssEffects';
 import './auth';
 import './loginui';
@@ -8,18 +10,19 @@ import './loginui';
 import { productBlueprint, emptyListAlert } from './createList';
 import '../scss/index.scss';
 
-// products list
-let products = [];
 // catching things
 const summary = document.querySelector('.items__summary');
 const form = document.querySelector('#form');
 export const saveBtn = document.querySelector('.btn__save');
 export const resetBtn = document.querySelector('.btn__reset');
 export const loadBtn = document.querySelector('.btn__load');
+export const btnPrint = document.querySelector('.btn__print');
 const notification = document.querySelector('.notification');
-const btnPrint = document.querySelector('.btn__print');
 const sumItemsPlace = document.querySelector('.sum__items');
 const sumKilosPlace = document.querySelector('.sum__kilos');
+
+// products list
+let products = [];
 
 // summary of quantity of all products
 const addSum = () => {
@@ -127,7 +130,10 @@ resetBtn.addEventListener('click', () => {
 
 const readList = () => {
 	const fromLocalStorage = localStorage.getItem('Shopping List');
-	products = JSON.parse(fromLocalStorage);
+	if (fromLocalStorage !== null) {
+		products = JSON.parse(fromLocalStorage);
+	}
+
 	renderList(products);
 };
 document.onload = readList();

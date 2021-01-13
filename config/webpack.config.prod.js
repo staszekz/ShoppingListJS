@@ -3,6 +3,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+
 // const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 module.exports = {
@@ -101,14 +103,14 @@ module.exports = {
 			filename: '[name]-[contenthash:6].css',
 		}),
 		// do kopiowanie elementów z folderów z public do build (np. zdjęcia)
-		new CopyPlugin({
-			patterns: [
-				{
-					from: 'src/images',
-					to: 'images',
-				},
-			],
-		}),
+		// new CopyPlugin({
+		// 	patterns: [
+		// 		{
+		// 			from: 'src/images',
+		// 			to: 'images',
+		// 		},
+		// 	],
+		// }),
 		new CssMinimizerPlugin({
 			test: /\.css$/i,
 		}),
