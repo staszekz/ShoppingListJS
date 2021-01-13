@@ -62,11 +62,14 @@ const renderList = products => {
 
 // handling delete buttons
 const deleteProduct = e => {
+	const value = e.target.getAttribute('value');
 	if (buttons.length === 0) {
 		return;
 	}
-	document.getElementById(`${e.target.value}`).remove();
-	products = products.filter(product => product.id !== parseInt(e.target.value, 10));
+	if (e.target.closest('button').classList.contains('item__delete')) {
+		document.getElementById(value).remove();
+	}
+	products = products.filter(product => product.id !== parseInt(value, 10));
 	if (buttons.length === 1) {
 		emptyListAlert();
 	}

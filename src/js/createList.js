@@ -38,7 +38,7 @@ export const productBlueprint = ({ name, category, quantity, unit, id }) => {
 
      <button value=${id} class="item__delete bg-danger badge col-1 ms-1 px-1 noPrint text-center" role="button" 
      
-      ><i class="far fa-trash-alt"></i
+      ><i value=${id} class="far fa-trash-alt"></i
       ></button>
       `;
 	const liElement = createLiElement();

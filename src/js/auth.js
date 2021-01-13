@@ -68,7 +68,6 @@ logForm.addEventListener('submit', e => {
 	e.preventDefault();
 	const email = logForm['emailToLogIn'].value;
 	const password = logForm['passwordToLogIn'].value;
-	// console.log(email, password);
 
 	auth
 		.signInWithEmailAndPassword(email, password)
