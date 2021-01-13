@@ -1,9 +1,19 @@
-@import 'bootstrap';
+@import '~bootstrap/scss/bootstrap';
 
-.items__summary{
-  font-size: larger;
+.items__summary {
+	font-size: larger;
 }
 
+footer {
+	height: 100px;
+	box-shadow: 0 -1px 10px lightgray;
+}
+nav {
+	box-shadow: 0 -2px 10px gray;
+}
+main {
+	margin-bottom: 100px;
+}
 @media print {
 	.noPrint {
 		display: none;
