@@ -4,7 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 // const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 module.exports = {
@@ -60,18 +61,6 @@ module.exports = {
 					},
 				],
 			},
-			// {
-			// 	loader: 'image-webpack-loader',
-			// 	options: {
-			// 		disable: true,
-			// 		mozjpeg: {
-			// 			quality: 50,
-			// 		},
-			// 		optipng: {
-			// 			enabled: true,
-			// 		},
-			// 	},
-			// },
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
@@ -102,38 +91,11 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: '[name]-[contenthash:6].css',
 		}),
-		// do kopiowanie elementów z folderów z public do build (np. zdjęcia)
-		// new CopyPlugin({
-		// 	patterns: [
-		// 		{
-		// 			from: 'src/images',
-		// 			to: 'images',
-		// 		},
-		// 	],
-		// }),
 		new CssMinimizerPlugin({
 			test: /\.css$/i,
 		}),
-		// new ImageMinimizerPlugin({
-		// 	minimizerOptions: {
-		// 		// Lossless optimization with custom option
-		// 		// Feel free to experiment with options for better result for you
-		// 		plugins: [
-		// 			['gifsicle', { interlaced: true }],
-		// 			['jpegtran', { progressive: true }],
-		// 			['optipng', { optimizationLevel: 5 }],
-		// 			[
-		// 				'svgo',
-		// 				{
-		// 					plugins: [
-		// 						{
-		// 							removeViewBox: false,
-		// 						},
-		// 					],
-		// 				},
-		// 			],
-		// 		],
-		// 	},
-		// }),
 	],
+	optimization: {
+		minimizer: [new TerserPlugin()],
+	},
 };

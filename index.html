@@ -227,7 +227,6 @@
 									id="emailToSignUp"
 									required
 								/>
-								<div class="valid-tooltip"> Looks good! </div>
 								<label for="passwordToSignUp">Password</label>
 								<input
 									class="form-control"
@@ -238,6 +237,9 @@
 								/>
 
 								<input class="btn btn-success mt-2" id="formSubmit" type="submit" value="Sign Up" />
+								<a class="btn col-12 text-primary text-muted mt-2 linkToLogIn"
+									>Already have an account? Log In!</a
+								>
 							</form>
 							<div class="modal-footer">
 								<div class="alert alert-danger d-none weakPassAlert"></div>
@@ -287,6 +289,9 @@
 
 								<input class="btn btn-success mt-2" id="logSubmit" type="submit" value="LogIn" />
 								<div class="alert alert-success d-none" id="loggedInAlert">Logged In</div>
+								<a class="btn col-12 text-primary text-muted mt-2 linkToSignUp"
+									>Do not have an account? Sign Up!</a
+								>
 							</form>
 							<div class="modal-footer">
 								<div class="alert alert-danger d-none wrongPassAlert"></div>

@@ -2,11 +2,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-// const postcssPresetEnv = require('postcss-preset-env');
-
-// import path from 'path';
+// const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
 	mode: 'development',
@@ -49,7 +45,6 @@ module.exports = {
 							},
 						},
 					},
-
 					'sass-loader',
 				],
 			},
@@ -73,19 +68,10 @@ module.exports = {
 								},
 							],
 						],
-						plugins: ['@babel/plugin-transform-runtime'],
+						plugins: ['@babel/plugin-proposal-class-properties'],
 					},
 				},
 			},
-			// {
-			// 	test: /\.js$/,
-			// 	include: path.resolve(__dirname, 'src/js'),
-			// 	enforce: 'pre',
-			// 	loader: 'eslint-loader',
-			// 	options: {
-			// 		emitWarning: true,
-			// 	},
-			// },
 		],
 	},
 	plugins: [
@@ -96,9 +82,6 @@ module.exports = {
 		}),
 		new MiniCssExtractPlugin({
 			filename: '[name]-[contenthash:6].min.css',
-		}),
-		new CssMinimizerPlugin({
-			test: /\.css$/i,
 		}),
 	],
 };

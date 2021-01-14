@@ -1,13 +1,7 @@
 import firebase from 'firebase/app';
-// import bootstrap from 'bootstrap.esm.js ';
 import 'firebase/auth';
 import 'firebase/analytics';
 import 'firebase/firestore';
-
-import 'bootstrap/js/dist/modal';
-import 'bootstrap/js/dist/button';
-import 'bootstrap/js/dist/alert';
-import 'bootstrap/js/dist/tooltip';
 
 import { resetBtn, saveBtn, loadBtn, btnPrint } from './index';
 
@@ -24,7 +18,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
-const db = firebase.firestore();
+export const db = firebase.firestore();
 
 const loginBtn = document.querySelector('.login-btn');
 const logoutBtn = document.querySelector('.logout-btn');
@@ -35,8 +29,12 @@ const closeSignUpBtn = document.querySelector('.closeSignBtn');
 const userName = document.querySelector('.user__name');
 const weakPassAlert = document.querySelector('.weakPassAlert');
 const wrongPassAlert = document.querySelector('.wrongPassAlert');
-
+const linkToLogIn = document.querySelector('.linkToLogIn');
+const linkToSignUp = document.querySelector('.linkToSignUp');
 const signForm = document.querySelector('#signForm');
+const logForm = document.getElementById('logForm');
+
+// creating new user
 signForm.addEventListener('submit', e => {
 	e.preventDefault();
 
@@ -51,12 +49,15 @@ signForm.addEventListener('submit', e => {
 			});
 		})
 		.then(() => closeSignUpBtn.click())
+		.then(() => auth.onAuthStateChanged(auth.currentUser))
+		.then(() => console.log(`bbbb`, auth.currentUser))
 		.catch(error => {
 			console.error(error.code);
 			weakPassAlert.innerText = error.message;
 			weakPassAlert.classList.remove('d-none');
 		});
 });
+
 // clearing forms after closin
 closeLogInBtn.addEventListener('click', () => {
 	logForm.reset();
@@ -67,7 +68,7 @@ closeSignUpBtn.addEventListener('click', () => {
 	weakPassAlert.classList.add('d-none');
 });
 
-// logout
+// conditionally showing login buttons
 const setupLoginBtns = user => {
 	if (user) {
 		logoutBtn.classList.remove('d-none');
@@ -83,16 +84,22 @@ const setupLoginBtns = user => {
 	}
 };
 
+// log out
 logoutBtn.addEventListener('click', e => {
 	e.preventDefault();
-	auth.signOut().then(() => {
-		logForm['logSubmit'].classList.remove('d-none');
-		document.querySelector('#loggedInAlert').classList.add('d-none');
-	});
+	auth
+		.signOut()
+		.then(() => {
+			logForm['logSubmit'].classList.remove('d-none');
+			document.querySelector('#loggedInAlert').classList.add('d-none');
+		})
+		.catch(error => {
+			console.error(error.code);
+			console.error(error.message);
+		});
 });
 
-const logForm = document.getElementById('logForm');
-
+// log in on prev created account
 logForm.addEventListener('submit', e => {
 	e.preventDefault();
 	const email = logForm['emailToLogIn'].value;
@@ -123,12 +130,21 @@ const renderBtns = () => {
 	btnPrint.removeAttribute('disabled');
 };
 
+// already have/do not have an account buttons
+linkToLogIn.addEventListener('click', () => {
+	closeSignUpBtn.click();
+	loginBtn.click();
+});
+linkToSignUp.addEventListener('click', () => {
+	closeLogInBtn.click();
+	signupBtn.click();
+});
 // listen to user status
 auth.onAuthStateChanged(user => {
 	renderBtns();
 	if (user) {
 		setupLoginBtns(user);
-		console.log('logged user', user.email);
+		console.log('logged user', user.email, user.displayName);
 	} else {
 		setupLoginBtns();
 		console.log('logged out', user);

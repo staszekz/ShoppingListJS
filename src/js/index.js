@@ -3,11 +3,9 @@ import Product from './product';
 import 'bootstrap/js/dist/modal';
 import 'bootstrap/js/dist/button';
 import 'bootstrap/js/dist/alert';
-import 'bootstrap/js/dist/tooltip';
 import './cssEffects';
 import './auth';
-import './loginui';
-// You can specify which plugins you need
+
 import { productBlueprint, emptyListAlert } from './createList';
 import '../scss/index.scss';
 
@@ -36,6 +34,7 @@ const units = {
 	kilos: 'kg',
 };
 
+// sum of items without kilos
 const sumOfItems = unit => {
 	const items = products
 		.filter(product => product.unit === unit)
@@ -83,6 +82,7 @@ const clickDel = e => {
 	renderList(products);
 };
 
+// adding listeners to delete buttons after each rendering
 let buttons = [];
 const addListenersToDeleteButtons = () => {
 	buttons = [...document.getElementsByClassName('item__delete')];
@@ -91,12 +91,12 @@ const addListenersToDeleteButtons = () => {
 	});
 };
 
-// getting value from radio input
+// getting value from radio input (items or kilos)
 const unitInput = () => {
 	return Array.from(document.getElementsByName('unit')).find(unit => unit.checked);
 };
 
-// handling submit from modal - form
+// handling form for adding new Item to list
 form.addEventListener('submit', e => {
 	e.preventDefault();
 	const nameInput = document.querySelector('#nameInput');
@@ -124,41 +124,23 @@ const handleLocalStorage = () => {
 
 saveBtn.addEventListener('click', handleLocalStorage);
 
+// cleaning list after reset btn clicked
 resetBtn.addEventListener('click', () => {
 	products = [];
 	renderList(products);
 });
 
+// restoring saved list of product from local storage
 const readList = () => {
 	const fromLocalStorage = localStorage.getItem('Shopping List');
 	if (fromLocalStorage !== null) {
 		products = JSON.parse(fromLocalStorage);
 	}
-
 	renderList(products);
 };
+
 document.onload = readList();
 loadBtn.addEventListener('click', readList);
 
 // printing
 btnPrint.addEventListener('click', () => window.print());
-
-const forms = document.querySelectorAll('.needs-validation');
-
-// Loop over them and prevent submission
-// const addValidation = () => {
-// 	forms.forEach(form=> {
-// 		form.addEventListener(
-// 			'submit',
-// 			function (event) {
-// 				if (!form.checkValidity()) {
-// 					event.preventDefault();
-// 					event.stopPropagation();
-// 				}
-
-// 				form.classList.add('was-validated');
-// 			},
-// 			false,
-// 		);
-// 	});
-// }
