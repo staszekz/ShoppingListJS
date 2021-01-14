@@ -3,6 +3,7 @@ import Product from './product';
 import 'bootstrap/js/dist/modal';
 import 'bootstrap/js/dist/button';
 import 'bootstrap/js/dist/alert';
+import 'bootstrap/js/dist/tooltip';
 import './cssEffects';
 import './auth';
 import './loginui';
@@ -141,3 +142,23 @@ loadBtn.addEventListener('click', readList);
 
 // printing
 btnPrint.addEventListener('click', () => window.print());
+
+const forms = document.querySelectorAll('.needs-validation');
+
+// Loop over them and prevent submission
+// const addValidation = () => {
+// 	forms.forEach(form=> {
+// 		form.addEventListener(
+// 			'submit',
+// 			function (event) {
+// 				if (!form.checkValidity()) {
+// 					event.preventDefault();
+// 					event.stopPropagation();
+// 				}
+
+// 				form.classList.add('was-validated');
+// 			},
+// 			false,
+// 		);
+// 	});
+// }

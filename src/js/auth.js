@@ -3,6 +3,12 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/analytics';
 import 'firebase/firestore';
+
+import 'bootstrap/js/dist/modal';
+import 'bootstrap/js/dist/button';
+import 'bootstrap/js/dist/alert';
+import 'bootstrap/js/dist/tooltip';
+
 import { resetBtn, saveBtn, loadBtn, btnPrint } from './index';
 
 const firebaseConfig = {
@@ -24,27 +30,44 @@ const loginBtn = document.querySelector('.login-btn');
 const logoutBtn = document.querySelector('.logout-btn');
 const signupBtn = document.querySelector('.signup-btn');
 const navSpinner = document.querySelector('.render');
-const closeLogInBtn = document.querySelector('.closeBtn');
+const closeLogInBtn = document.querySelector('.closeLogBtn');
+const closeSignUpBtn = document.querySelector('.closeSignBtn');
+const userName = document.querySelector('.user__name');
+const weakPassAlert = document.querySelector('.weakPassAlert');
+const wrongPassAlert = document.querySelector('.wrongPassAlert');
 
 const signForm = document.querySelector('#signForm');
 signForm.addEventListener('submit', e => {
 	e.preventDefault();
 
-	const email = signForm['emailToSignIn'].value;
-	const password = signForm['passwordToSignIn'].value;
-	const name = signForm['nameToSignIn'].value;
-
-	console.log(name, email, password);
-
-	auth.createUserWithEmailAndPassword(email, password).then(cred => {
-		cred.user.updateProfile({
-			displayName: name,
+	const email = signForm['emailToSignUp'].value;
+	const password = signForm['passwordToSignUp'].value;
+	const name = signForm['nameToSignUp'].value;
+	auth
+		.createUserWithEmailAndPassword(email, password)
+		.then(cred => {
+			cred.user.updateProfile({
+				displayName: name,
+			});
+		})
+		.then(() => closeSignUpBtn.click())
+		.catch(error => {
+			console.error(error.code);
+			weakPassAlert.innerText = error.message;
+			weakPassAlert.classList.remove('d-none');
 		});
-	});
+});
+// clearing forms after closin
+closeLogInBtn.addEventListener('click', () => {
+	logForm.reset();
+	wrongPassAlert.classList.add('d-none');
+});
+closeSignUpBtn.addEventListener('click', () => {
+	signForm.reset();
+	weakPassAlert.classList.add('d-none');
 });
 
 // logout
-const userName = document.querySelector('.user__name');
 const setupLoginBtns = user => {
 	if (user) {
 		logoutBtn.classList.remove('d-none');
@@ -68,9 +91,8 @@ logoutBtn.addEventListener('click', e => {
 	});
 });
 
-// log in
-
 const logForm = document.getElementById('logForm');
+
 logForm.addEventListener('submit', e => {
 	e.preventDefault();
 	const email = logForm['emailToLogIn'].value;
@@ -82,7 +104,12 @@ logForm.addEventListener('submit', e => {
 			logForm['logSubmit'].classList.add('d-none');
 		})
 		.then(() => closeLogInBtn.click())
-		.then(() => logForm.reset());
+		.then(() => logForm.reset())
+		.catch(error => {
+			console.error(error.code);
+			wrongPassAlert.innerText = `Wrong e-mail or password`;
+			wrongPassAlert.classList.remove('d-none');
+		});
 });
 
 const renderBtns = () => {

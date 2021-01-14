@@ -25,28 +25,28 @@
 			class="navbar sticky-top navbar-light bg-dark container-fluid justify-content-between align-items-cener"
 		>
 			<div class="lead col-2 text-center rounded user__name text-warning">Guest</div>
-			<div class="col-8 d-flex justify-content-end">
+			<div class="col-8 d-flex justify-content-end noPrint">
 				<div class="render d-flex justify-content-center">
 					<div class="spinner-grow text-warning" role="status">
 						<span class="visually-hidden">Loading...</span>
 					</div>
 				</div>
 				<button
-					class="btn text-warning navbar-brand text-right d-none login-btn invisible"
+					class="btn text-warning navbar-brand text-right d-none login-btn invisible noPrint"
 					id="login-btn"
 					data-bs-toggle="modal"
 					data-bs-target="#loginModal"
 					>LogIn</button
 				>
 				<button
-					class="btn text-success navbar-brand d-none text-right signup-btn invisible"
+					class="btn text-success navbar-brand d-none text-right signup-btn invisible noPrint"
 					id="signup-btn"
 					data-bs-toggle="modal"
 					data-bs-target="#signupModal"
 					>SignUp</button
 				>
 				<button
-					class="btn text-info navbar-brand d-none text-right d-none logout-btn invisible"
+					class="btn text-info navbar-brand d-none text-right d-none logout-btn invisible noPrint"
 					id="logout-btn"
 					>Log Out</button
 				>
@@ -205,19 +205,46 @@
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h1 class="mt-5">Sign In</h1>
+							<h1 class="modal-title" id="signupModalTitle">Please Sign Up</h1>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 							</button>
 						</div>
 						<div class="modal-body">
 							<form id="signForm">
-								<input type="text" name="nameToSignIn" id="nameToSignIn" required />
-								<input type="email" name="emailToSignIn" id="emailToSignIn" />
-								<input type="password" name="passwordToSignIn" id="passwordToSignIn" />
-								<input class="btn btn-success" id="formSubmit" type="submit" value="sign" />
+								<label for="nameToSignUp">Name</label>
+								<input
+									class="form-control"
+									type="text"
+									name="nameToSignUp"
+									id="nameToSignUp"
+									required
+								/>
+								<label for="emailToSignUp">E-mail</label>
+								<input
+									class="form-control"
+									type="email"
+									name="emailToSignUp"
+									id="emailToSignUp"
+									required
+								/>
+								<div class="valid-tooltip"> Looks good! </div>
+								<label for="passwordToSignUp">Password</label>
+								<input
+									class="form-control"
+									type="password"
+									name="passwordToSignUp"
+									id="passwordToSignUp"
+									required
+								/>
+
+								<input class="btn btn-success mt-2" id="formSubmit" type="submit" value="Sign Up" />
 							</form>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+								<div class="alert alert-danger d-none weakPassAlert"></div>
+								<button
+									type="button"
+									class="btn btn-outline-secondary closeSignBtn"
+									data-bs-dismiss="modal"
 									>Close</button
 								>
 							</div>
@@ -241,8 +268,6 @@
 						</div>
 						<div class="modal-body">
 							<form id="logForm">
-								<!-- <label for="nameToLogIn"> Name</label>
-								<input class="form-control" type="text" name="nameToLogIn" id="nameToLogIn" /> -->
 								<label for="emailToLogIn">E-mail</label>
 								<input
 									class="form-control"
@@ -264,9 +289,10 @@
 								<div class="alert alert-success d-none" id="loggedInAlert">Logged In</div>
 							</form>
 							<div class="modal-footer">
+								<div class="alert alert-danger d-none wrongPassAlert"></div>
 								<button
 									type="button"
-									class="btn btn-outline-secondary closeBtn"
+									class="btn btn-outline-secondary closeLogBtn"
 									data-bs-dismiss="modal"
 									>Close</button
 								>
