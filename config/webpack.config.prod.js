@@ -2,11 +2,9 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-// const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 module.exports = {
 	mode: 'production',
@@ -50,13 +48,13 @@ module.exports = {
 				],
 			},
 			{
-				test: /\.(jpg|png|svg|gif|jpeg)$/,
+				test: /\.(jpg|png|svg|gif|jpeg|ico)$/,
 				use: [
 					{
 						loader: 'file-loader',
 						options: {
 							name: '[name]-[contenthash:6].[ext]',
-							outputPath: 'images',
+							outputPath: 'img',
 						},
 					},
 				],
@@ -93,6 +91,14 @@ module.exports = {
 		}),
 		new CssMinimizerPlugin({
 			test: /\.css$/i,
+		}),
+		new CopyPlugin({
+			patterns: [
+				{
+					from: 'src/img',
+					to: 'img',
+				},
+			],
 		}),
 	],
 	optimization: {

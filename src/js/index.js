@@ -5,7 +5,7 @@ import 'bootstrap/js/dist/button';
 import 'bootstrap/js/dist/alert';
 import './cssEffects';
 import './auth';
-
+import './db';
 import { productBlueprint, emptyListAlert } from './createList';
 import '../scss/index.scss';
 
@@ -19,7 +19,7 @@ export const btnPrint = document.querySelector('.btn__print');
 const notification = document.querySelector('.notification');
 const sumItemsPlace = document.querySelector('.sum__items');
 const sumKilosPlace = document.querySelector('.sum__kilos');
-
+const closeSaveModalBtn = document.querySelector('.closeSaveModalBtn');
 // products list
 let products = [];
 
@@ -111,10 +111,9 @@ form.addEventListener('submit', e => {
 
 // saving list into localStorage
 const displayNotification = () => {
-	notification.classList.toggle('invisible');
 	setTimeout(() => {
-		notification.classList.toggle('invisible');
-	}, 1500);
+		closeSaveModalBtn.click();
+	}, 700);
 };
 
 const handleLocalStorage = () => {

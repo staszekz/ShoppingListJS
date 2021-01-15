@@ -2,6 +2,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 // const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
@@ -50,7 +51,15 @@ module.exports = {
 			},
 			{
 				test: /\.(jpg|png|svg|gif|jpeg)$/,
-				use: 'file-loader',
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							name: '[name]-[contenthash:6].[ext]',
+							outputPath: 'img',
+						},
+					},
+				],
 			},
 			{
 				test: /\.js$/,
@@ -82,6 +91,14 @@ module.exports = {
 		}),
 		new MiniCssExtractPlugin({
 			filename: '[name]-[contenthash:6].min.css',
+		}),
+		new CopyPlugin({
+			patterns: [
+				{
+					from: 'src/img',
+					to: 'img',
+				},
+			],
 		}),
 	],
 };

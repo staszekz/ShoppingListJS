@@ -7,7 +7,7 @@
 		<title> <%= htmlWebpackPlugin.options.title %> </title>
 		<!-- Favicon -->
 
-		<link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+		<link rel="icon" href="./img/favicon.ico" type="image/x-icon" />
 		<!-- Font Awesome -->
 		<link
 			rel="stylesheet"
@@ -64,7 +64,11 @@
 				<button class="col-2 btn btn-outline-danger btn__reset text-center noPrint h1 me-1" disabled
 					>Reset</button
 				>
-				<button class="col-2 btn btn-outline-success btn__save text-center noPrint h1" disabled
+				<button
+					class="col-2 btn btn-outline-success btn__save text-center noPrint h1"
+					data-bs-toggle="modal"
+					data-bs-target="#saveModal"
+					disabled
 					>Save</button
 				>
 			</header>
@@ -192,6 +196,23 @@
 						</div>
 					</div>
 					<!-- end of modal -->
+				</div>
+			</div>
+
+			<div
+				class="modal fade"
+				tabindex="-1"
+				aria-labelledby="signupModal"
+				aria-hidden="true"
+				id="saveModal"
+			>
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content"> <div class="modal-body text-center bg-success text-light p-5">LIST SAVED</div>
+					<div class="modal-footer bg-success">
+						<button type="button" class="btn btn-warning closeSaveModalBtn" data-bs-dismiss="modal"
+							>Close
+						</button>
+					</div>
 				</div>
 			</div>
 

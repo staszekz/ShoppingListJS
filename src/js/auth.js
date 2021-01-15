@@ -49,7 +49,7 @@ signForm.addEventListener('submit', e => {
 			});
 		})
 		.then(() => closeSignUpBtn.click())
-		.then(() => auth.onAuthStateChanged(auth.currentUser))
+		// .then(() => window.reload())
 		.then(() => console.log(`bbbb`, auth.currentUser))
 		.catch(error => {
 			console.error(error.code);
@@ -144,7 +144,7 @@ auth.onAuthStateChanged(user => {
 	renderBtns();
 	if (user) {
 		setupLoginBtns(user);
-		console.log('logged user', user.email, user.displayName);
+		console.log('logged user', user, user.displayName);
 	} else {
 		setupLoginBtns();
 		console.log('logged out', user);
