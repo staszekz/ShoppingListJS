@@ -17,7 +17,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-const auth = firebase.auth();
+export const auth = firebase.auth();
 export const db = firebase.firestore();
 
 const loginBtn = document.querySelector('.login-btn');
@@ -144,6 +144,7 @@ auth.onAuthStateChanged(user => {
 	renderBtns();
 	if (user) {
 		setupLoginBtns(user);
+		console.log('userrrr', user.uid);
 		console.log('logged user', user, user.displayName);
 	} else {
 		setupLoginBtns();

@@ -55,9 +55,6 @@
 		<main class="container-lg mt-2 pb-2">
 			<header class="row d-flex align-items-center justify-content-evenly me-1">
 				<button class="col-2 btn btn-outline-dark btn__print noPrint" disabled> Print </button>
-				<p class="invisible col-2 alert text-muted text-center alert-success notification">
-					saved
-				</p>
 				<button class="col-2 btn btn-outline-info btn__load text-center noPrint h1 me-1" disabled
 					>Load</button
 				>
@@ -200,22 +197,26 @@
 			</div>
 
 			<div
-				class="modal fade"
-				tabindex="-1"
-				aria-labelledby="signupModal"
-				aria-hidden="true"
+				class="modal"
 				id="saveModal"
+				tabindex="-1"
+				aria-labelledby="saveModal"
+				aria-hidden="true"
 			>
 				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content"> <div class="modal-body text-center bg-success text-light p-5">LIST SAVED</div>
-					<div class="modal-footer bg-success">
-						<button type="button" class="btn btn-warning closeSaveModalBtn" data-bs-dismiss="modal"
-							>Close
-						</button>
+					<div class="modal-content">
+						<div class="modal-body text-center bg-success text-light p-5">LIST SAVED</div>
+						<div class="modal-footer bg-success">
+							<button
+								type="button"
+								class="btn btn-warning closeSaveModalBtn"
+								data-bs-dismiss="modal"
+								>Close
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
-
 			<div
 				class="modal fade"
 				id="signupModal"

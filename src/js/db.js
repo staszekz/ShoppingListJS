@@ -1,3 +1,11 @@
-import { db } from './auth';
+// import { db, auth } from './auth';
 
-console.log('db', db);
+// const ddd = () => {
+// 	if (auth.currentUser) {
+// 		console.log('user', auth.currentUser);
+// 	} else {
+// 		console.log(`not`);
+// 	}
+// };
+
+// ddd();
