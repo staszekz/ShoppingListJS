@@ -4,6 +4,7 @@ import 'firebase/analytics';
 import 'firebase/firestore';
 
 import { resetBtn, saveBtn, loadBtn, btnPrint } from './index';
+import { productsList} from './createList'
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyBh1FUATgC4cxDngnk084fSC9CRb9383EY',
@@ -33,6 +34,7 @@ const linkToLogIn = document.querySelector('.linkToLogIn');
 const linkToSignUp = document.querySelector('.linkToSignUp');
 const signForm = document.querySelector('#signForm');
 const logForm = document.getElementById('logForm');
+const liItem = document.getElementsByClassName('list-group-item')
 
 // creating new user
 signForm.addEventListener('submit', e => {
@@ -139,6 +141,18 @@ linkToSignUp.addEventListener('click', () => {
 	closeLogInBtn.click();
 	signupBtn.click();
 });
+
+
+const changeLoggedColor = (user) =>{
+if(user){
+			document.body.classList.add('loggedColor')
+			liItem.forEach(li=> li.classList.add('loggedColor'))
+} else{
+				document.body.classList.remove('loggedColor')
+			liItem.forEach(li=> li.classList.remove('loggedColor'))
+}
+}
+
 // listen to user status
 auth.onAuthStateChanged(user => {
 	renderBtns();
@@ -146,8 +160,11 @@ auth.onAuthStateChanged(user => {
 		setupLoginBtns(user);
 		console.log('userrrr', user.uid);
 		console.log('logged user', user, user.displayName);
+changeLoggedColor(user);
 	} else {
 		setupLoginBtns();
 		console.log('logged out', user);
+changeLoggedColor()
+
 	}
 });
