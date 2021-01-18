@@ -1,4 +1,4 @@
-// import { db, auth } from './auth';
+import { db, auth } from './auth';
 
 // const ddd = () => {
 // 	if (auth.currentUser) {

@@ -3,7 +3,7 @@ import 'firebase/auth';
 import 'firebase/analytics';
 import 'firebase/firestore';
 
-import { resetBtn, saveBtn, loadBtn, btnPrint } from './index';
+import { resetBtn, saveBtn, loadBtn, btnPrint, reloadBtn, sendBtn, readList, products, renderList } from './index';
 import { productsList} from './createList'
 
 const firebaseConfig = {
@@ -130,6 +130,9 @@ const renderBtns = () => {
 	loadBtn.removeAttribute('disabled');
 	saveBtn.removeAttribute('disabled');
 	btnPrint.removeAttribute('disabled');
+	sendBtn.removeAttribute('disabled');
+	reloadBtn.removeAttribute('disabled');
+
 };
 
 // already have/do not have an account buttons
@@ -145,26 +148,70 @@ linkToSignUp.addEventListener('click', () => {
 
 const changeLoggedColor = (user) =>{
 if(user){
-			document.body.classList.add('loggedColor')
-			liItem.forEach(li=> li.classList.add('loggedColor'))
+	document.body.classList.add('loggedColor')
+	liItem.forEach(li=> li.classList.add('loggedColor'))
 } else{
-				document.body.classList.remove('loggedColor')
-			liItem.forEach(li=> li.classList.remove('loggedColor'))
+	document.body.classList.remove('loggedColor')
+	liItem.forEach(li=> li.classList.remove('loggedColor'))
 }
 }
+
+// saving new shopping list
+
+const saveNewList = () =>{
+	console.log('rrrr', ...products)
+	db.collection(auth.currentUser.uid).doc().delete()
+	.then(()=>{
+   products.forEach(product=>{
+		 console.log('product', product)
+   db.collection(auth.currentUser.uid).add(product)
+	 })
+
+	})
+}
+// buttons to fetch or localStorage
+const showFetchingBtns = (user)=>{
+ if(user){
+	 sendBtn.classList.remove('d-none');
+	 reloadBtn.classList.remove('d-none');
+	 saveBtn.classList.add('d-none');
+	 loadBtn.classList.add('d-none');
+   sendBtn.addEventListener('click', saveNewList);
+ } else {
+	 sendBtn.classList.add('d-none');
+	 reloadBtn.classList.add('d-none');
+	 saveBtn.classList.remove('d-none');
+	 loadBtn.classList.remove('d-none');
+ }
+}
+
+// fetch shopping list from firebase
+
+
+
+
 
 // listen to user status
 auth.onAuthStateChanged(user => {
 	renderBtns();
 	if (user) {
+		// setting buttons
 		setupLoginBtns(user);
-		console.log('userrrr', user.uid);
-		console.log('logged user', user, user.displayName);
-changeLoggedColor(user);
+		showFetchingBtns(user);
+    changeLoggedColor(user);
+		// to empty list before fetching
+		products.length = 0;
+		// fetching data from firebase
+		db.collection(user.uid).get().then((querySnapshot)=>{
+			querySnapshot.forEach((doc)=>{
+		    products.push(doc.data())
+			})
+			// rendering fetched list
+		}).then(()=>renderList(products))
 	} else {
 		setupLoginBtns();
-		console.log('logged out', user);
-changeLoggedColor()
-
+    changeLoggedColor()
+    showFetchingBtns()
+		readList()
 	}
 });

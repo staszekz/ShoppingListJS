@@ -13,6 +13,8 @@ import '../scss/index.scss';
 const summary = document.querySelector('.items__summary');
 const form = document.querySelector('#form');
 export const saveBtn = document.querySelector('.btn__save');
+export const sendBtn = document.querySelector('.btn__send');
+export const reloadBtn = document.querySelector('.btn__reload');
 export const resetBtn = document.querySelector('.btn__reset');
 export const loadBtn = document.querySelector('.btn__load');
 export const btnPrint = document.querySelector('.btn__print');
@@ -21,7 +23,7 @@ const sumItemsPlace = document.querySelector('.sum__items');
 const sumKilosPlace = document.querySelector('.sum__kilos');
 const closeSaveModalBtn = document.querySelector('.closeSaveModalBtn');
 // products list
-let products = [];
+export let products = [];
 
 // summary of quantity of all products
 const addSum = () => {
@@ -46,7 +48,7 @@ const sumOfItems = unit => {
 };
 
 // rendering of list - first cleaning old list, and renders again
-const renderList = products => {
+export const renderList = products => {
 	const all = document.querySelectorAll('.list__to__remove');
 	all.forEach(el => {
 		el.remove();
@@ -130,7 +132,7 @@ resetBtn.addEventListener('click', () => {
 });
 
 // restoring saved list of product from local storage
-const readList = () => {
+export const readList = () => {
 	const fromLocalStorage = localStorage.getItem('Shopping List');
 	if (fromLocalStorage !== null) {
 		products = JSON.parse(fromLocalStorage);
@@ -138,7 +140,7 @@ const readList = () => {
 	renderList(products);
 };
 
-document.onload = readList();
+// document.onload = readList();
 loadBtn.addEventListener('click', readList);
 
 // printing
