@@ -4,7 +4,7 @@ import 'firebase/analytics';
 import 'firebase/firestore';
 
 import { resetBtn, saveBtn, loadBtn, btnPrint, reloadBtn, sendBtn, readList, products, renderList } from './index';
-import { productsList} from './createList'
+import { productsList } from './createList'
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyBh1FUATgC4cxDngnk084fSC9CRb9383EY',
@@ -146,50 +146,59 @@ linkToSignUp.addEventListener('click', () => {
 });
 
 
-const changeLoggedColor = (user) =>{
-if(user){
-	document.body.classList.add('loggedColor')
-	liItem.forEach(li=> li.classList.add('loggedColor'))
-} else{
-	document.body.classList.remove('loggedColor')
-	liItem.forEach(li=> li.classList.remove('loggedColor'))
-}
+const changeLoggedColor = (user) => {
+	if (user) {
+		document.body.classList.add('loggedColor')
+		liItem.forEach(li => li.classList.add('loggedColor'))
+	} else {
+		document.body.classList.remove('loggedColor')
+		liItem.forEach(li => li.classList.remove('loggedColor'))
+	}
 }
 
 // saving new shopping list
-
-const saveNewList = () =>{
-	console.log('rrrr', ...products)
-	db.collection(auth.currentUser.uid).doc().delete()
-	.then(()=>{
-   products.forEach(product=>{
-		 console.log('product', product)
-   db.collection(auth.currentUser.uid).add(product)
-	 })
-
+const saveNewList = () => {
+	// deleting every document in forestore
+	db.collection(auth.currentUser.uid).get().then((querySnapshot) => {
+		const batch = db.batch()
+		querySnapshot.forEach(doc => {
+			batch.delete(doc.ref);
+		});
+		return batch.commit()
+		// seving new shopping list
 	})
+		.then(() => {
+			products.forEach(product => {
+				console.log('product', product)
+				db.collection(auth.currentUser.uid).add(Object.assign({}, product))
+			})
+		})
 }
+
 // buttons to fetch or localStorage
-const showFetchingBtns = (user)=>{
- if(user){
-	 sendBtn.classList.remove('d-none');
-	 reloadBtn.classList.remove('d-none');
-	 saveBtn.classList.add('d-none');
-	 loadBtn.classList.add('d-none');
-   sendBtn.addEventListener('click', saveNewList);
- } else {
-	 sendBtn.classList.add('d-none');
-	 reloadBtn.classList.add('d-none');
-	 saveBtn.classList.remove('d-none');
-	 loadBtn.classList.remove('d-none');
- }
+const showFetchingBtns = (user) => {
+	if (user) {
+		sendBtn.classList.remove('d-none');
+		reloadBtn.classList.remove('d-none');
+		saveBtn.classList.add('d-none');
+		loadBtn.classList.add('d-none');
+		sendBtn.addEventListener('click', saveNewList);
+	} else {
+		sendBtn.classList.add('d-none');
+		reloadBtn.classList.add('d-none');
+		saveBtn.classList.remove('d-none');
+		loadBtn.classList.remove('d-none');
+	}
 }
 
-// fetch shopping list from firebase
-
-
-
-
+// fetch data from firestore
+const fetchList = (user) => {
+	db.collection(user.uid).get().then((querySnapshot) => {
+		querySnapshot.forEach((doc) => {
+			products.push(doc.data())
+		})
+	}).then(() => renderList(products))
+}
 
 // listen to user status
 auth.onAuthStateChanged(user => {
@@ -198,20 +207,17 @@ auth.onAuthStateChanged(user => {
 		// setting buttons
 		setupLoginBtns(user);
 		showFetchingBtns(user);
-    changeLoggedColor(user);
+		changeLoggedColor(user);
 		// to empty list before fetching
 		products.length = 0;
-		// fetching data from firebase
-		db.collection(user.uid).get().then((querySnapshot)=>{
-			querySnapshot.forEach((doc)=>{
-		    products.push(doc.data())
-			})
-			// rendering fetched list
-		}).then(()=>renderList(products))
+
+		// rendering fetched list
+		fetchList(user)
+
 	} else {
 		setupLoginBtns();
-    changeLoggedColor()
-    showFetchingBtns()
+		changeLoggedColor()
+		showFetchingBtns()
 		readList()
 	}
 });
