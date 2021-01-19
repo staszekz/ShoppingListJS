@@ -13,7 +13,7 @@ module.exports = {
 	},
 	output: {
 		filename: 'js/[name]-[contenthash:6]-bundle.js',
-		path: path.resolve(__dirname, '../public'),
+		path: path.resolve(__dirname, '../dist'),
 	},
 	module: {
 		rules: [
