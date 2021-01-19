@@ -53,7 +53,9 @@ export const renderList = products => {
 		el.remove();
 	});
 	if (products.length) {
-		products.map(product => productBlueprint(product));
+		products
+			.reverse()
+			.map(product => productBlueprint(product));
 		addListenersToDeleteButtons();
 	} else {
 		emptyListAlert();
@@ -111,7 +113,7 @@ form.addEventListener('submit', e => {
 });
 
 // saving list into localStorage
-const displayNotification = () => {
+export const displayNotification = () => {
 	setTimeout(() => {
 		closeSaveModalBtn.click();
 	}, 700);

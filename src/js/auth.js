@@ -3,7 +3,7 @@ import 'firebase/auth';
 import 'firebase/analytics';
 import 'firebase/firestore';
 
-import { resetBtn, saveBtn, loadBtn, btnPrint, getBtn, sendBtn, readList, products, renderList } from './index';
+import { resetBtn, saveBtn, loadBtn, btnPrint, getBtn, sendBtn, readList, products, renderList, displayNotification } from './index';
 import { productsList } from './createList'
 
 const firebaseConfig = {
@@ -169,10 +169,10 @@ const saveNewList = () => {
 	})
 		.then(() => {
 			products.forEach(product => {
-				console.log('product', product)
 				db.collection(auth.currentUser.uid).add(Object.assign({}, product))
 			})
 		})
+		.then(() => displayNotification())
 }
 
 // buttons to fetch or localStorage
