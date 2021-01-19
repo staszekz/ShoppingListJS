@@ -3,7 +3,7 @@ import 'firebase/auth';
 import 'firebase/analytics';
 import 'firebase/firestore';
 
-import { resetBtn, saveBtn, loadBtn, btnPrint, reloadBtn, sendBtn, readList, products, renderList } from './index';
+import { resetBtn, saveBtn, loadBtn, btnPrint, getBtn, sendBtn, readList, products, renderList } from './index';
 import { productsList } from './createList'
 
 const firebaseConfig = {
@@ -131,7 +131,7 @@ const renderBtns = () => {
 	saveBtn.removeAttribute('disabled');
 	btnPrint.removeAttribute('disabled');
 	sendBtn.removeAttribute('disabled');
-	reloadBtn.removeAttribute('disabled');
+	getBtn.removeAttribute('disabled');
 
 };
 
@@ -179,13 +179,13 @@ const saveNewList = () => {
 const showFetchingBtns = (user) => {
 	if (user) {
 		sendBtn.classList.remove('d-none');
-		reloadBtn.classList.remove('d-none');
+		getBtn.classList.remove('d-none');
 		saveBtn.classList.add('d-none');
 		loadBtn.classList.add('d-none');
 		sendBtn.addEventListener('click', saveNewList);
 	} else {
 		sendBtn.classList.add('d-none');
-		reloadBtn.classList.add('d-none');
+		getBtn.classList.add('d-none');
 		saveBtn.classList.remove('d-none');
 		loadBtn.classList.remove('d-none');
 	}
@@ -193,6 +193,9 @@ const showFetchingBtns = (user) => {
 
 // fetch data from firestore
 const fetchList = (user) => {
+	// to empty list before fetching
+	products.length = 0;
+	// set new list
 	db.collection(user.uid).get().then((querySnapshot) => {
 		querySnapshot.forEach((doc) => {
 			products.push(doc.data())
@@ -200,20 +203,19 @@ const fetchList = (user) => {
 	}).then(() => renderList(products))
 }
 
+// handling button GET
+
 // listen to user status
 auth.onAuthStateChanged(user => {
 	renderBtns();
 	if (user) {
+		getBtn.addEventListener('click', () => fetchList(user))
 		// setting buttons
 		setupLoginBtns(user);
 		showFetchingBtns(user);
 		changeLoggedColor(user);
-		// to empty list before fetching
-		products.length = 0;
-
 		// rendering fetched list
 		fetchList(user)
-
 	} else {
 		setupLoginBtns();
 		changeLoggedColor()
