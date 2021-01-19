@@ -200,10 +200,12 @@ const fetchList = (user) => {
 		querySnapshot.forEach((doc) => {
 			products.push(doc.data())
 		})
-	}).then(() => renderList(products))
+	}).then(() => {
+		renderList(products)
+		changeLoggedColor(user);
+	}
+	)
 }
-
-// handling button GET
 
 // listen to user status
 auth.onAuthStateChanged(user => {
@@ -213,7 +215,6 @@ auth.onAuthStateChanged(user => {
 		// setting buttons
 		setupLoginBtns(user);
 		showFetchingBtns(user);
-		changeLoggedColor(user);
 		// rendering fetched list
 		fetchList(user)
 	} else {

@@ -5,7 +5,6 @@ import 'bootstrap/js/dist/button';
 import 'bootstrap/js/dist/alert';
 import './cssEffects';
 import './auth';
-import './db';
 import { productBlueprint, emptyListAlert } from './createList';
 import '../scss/index.scss';
 

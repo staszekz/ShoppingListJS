@@ -10,15 +10,4 @@ const addNavShadow = () => {
 	}
 };
 
-// window.onscroll = addNavShadow();
-
-// const addNavbarBgrColor = () => {
-// 	if (window.scrollY > 100) {
-// 		navBar.classList.add('nav__bgr');
-// 	}
-// 	if (window.scrollY < 100) {
-// 		navBar.classList.remove('nav__bgr');
-// 	}
-// };
-
 window.addEventListener('scroll', addNavShadow);
