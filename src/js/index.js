@@ -54,7 +54,6 @@ export const renderList = products => {
 		el.remove();
 	});
 	if (products.length) {
-		changeLoggedColor(auth.currentUser);
 		products.reverse().map(product => productBlueprint(product));
 		addListenersToDeleteButtons();
 	} else {

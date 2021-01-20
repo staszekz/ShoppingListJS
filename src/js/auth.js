@@ -45,7 +45,6 @@ const linkToLogIn = document.querySelector('.linkToLogIn');
 const linkToSignUp = document.querySelector('.linkToSignUp');
 const signForm = document.querySelector('#signForm');
 const logForm = document.getElementById('logForm');
-const liItem = document.getElementsByClassName('list-group-item');
 
 // creating new user
 signForm.addEventListener('submit', e => {
@@ -155,13 +154,11 @@ linkToSignUp.addEventListener('click', () => {
 	signupBtn.click();
 });
 
-export const changeLoggedColor = user => {
+const changeLoggedColor = user => {
 	if (user) {
 		document.body.classList.add('loggedColor');
-		liItem.forEach(li => li.classList.add('loggedColor'));
 	} else {
 		document.body.classList.remove('loggedColor');
-		liItem.forEach(li => li.classList.remove('loggedColor'));
 	}
 };
 
@@ -176,7 +173,7 @@ const saveNewList = () => {
 				batch.delete(doc.ref);
 			});
 			return batch.commit();
-			// seving new shopping list
+			// saving new shopping list
 		})
 		.then(() => {
 			products.forEach(product => {
