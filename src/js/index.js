@@ -4,7 +4,8 @@ import 'bootstrap/js/dist/modal';
 import 'bootstrap/js/dist/button';
 import 'bootstrap/js/dist/alert';
 import './cssEffects';
-import './auth';
+// import './auth';
+import { auth, changeLoggedColor } from './auth';
 import { productBlueprint, emptyListAlert } from './createList';
 import '../scss/index.scss';
 
@@ -26,12 +27,12 @@ export let products = [];
 
 // summary of quantity of all products
 const addSum = () => {
-	summary.innerText = `Razem pozycji: ${products.length}`;
+	summary.innerText = `Total products: ${products.length}`;
 };
 
 // quantity sum of each unit
 const units = {
-	item: 'szt.',
+	item: 'pcs.',
 	kilos: 'kg',
 };
 
@@ -53,9 +54,8 @@ export const renderList = products => {
 		el.remove();
 	});
 	if (products.length) {
-		products
-			.reverse()
-			.map(product => productBlueprint(product));
+		changeLoggedColor(auth.currentUser);
+		products.reverse().map(product => productBlueprint(product));
 		addListenersToDeleteButtons();
 	} else {
 		emptyListAlert();
@@ -108,7 +108,6 @@ form.addEventListener('submit', e => {
 	const unit = unitInput().value;
 	products.push(new Product(nameInput.value, categoryInput.value, quantityInput.value, unit));
 	renderList(products);
-
 	form.reset();
 });
 

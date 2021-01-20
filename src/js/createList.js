@@ -1,6 +1,6 @@
 // creation of list elements
 
-import { pickColor, nameChanger } from './switches';
+import { pickColor } from './switches';
 
 export const productsList = document.querySelector('.list-group');
 
@@ -22,7 +22,7 @@ export const emptyListAlert = () => {
 	const liElement = createLiElement();
 	liElement.classList.remove('list-group-item');
 	liElement.classList.add('alert', 'alert-warning');
-	liElement.innerText = 'lista zakupów jest pusta';
+	liElement.innerText = 'Your list is empty, add something';
 	productsList.appendChild(liElement);
 };
 
@@ -30,7 +30,7 @@ export const productBlueprint = ({ name, category, quantity, unit, id }) => {
 	const elementHTML = `
       <span class="item__name col-6">${name}</span>
       <span class="item__group col-3 badge bg-${pickColor(category)} me-1"
-      >${nameChanger(category)}</span>
+      >${category}</span>
       <span class="badge bg-primary rounded-pill item__count col-2"
       >${quantity}
       <span class="item__unit">${unit}</span>

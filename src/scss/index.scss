@@ -18,9 +18,10 @@ nav {
 main {
 	margin-bottom: 100px;
 }
-.loggedColor{
+.loggedColor {
 	background-color: rgba(255, 140, 0, 0.2);
 }
+
 @media print {
 	.noPrint {
 		display: none;

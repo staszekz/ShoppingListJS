@@ -3,8 +3,19 @@ import 'firebase/auth';
 import 'firebase/analytics';
 import 'firebase/firestore';
 
-import { resetBtn, saveBtn, loadBtn, btnPrint, getBtn, sendBtn, readList, products, renderList, displayNotification } from './index';
-import { productsList } from './createList'
+import {
+	resetBtn,
+	saveBtn,
+	loadBtn,
+	btnPrint,
+	getBtn,
+	sendBtn,
+	readList,
+	products,
+	renderList,
+	displayNotification,
+} from './index';
+import { productsList } from './createList';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyBh1FUATgC4cxDngnk084fSC9CRb9383EY',
@@ -34,7 +45,7 @@ const linkToLogIn = document.querySelector('.linkToLogIn');
 const linkToSignUp = document.querySelector('.linkToSignUp');
 const signForm = document.querySelector('#signForm');
 const logForm = document.getElementById('logForm');
-const liItem = document.getElementsByClassName('list-group-item')
+const liItem = document.getElementsByClassName('list-group-item');
 
 // creating new user
 signForm.addEventListener('submit', e => {
@@ -132,7 +143,6 @@ const renderBtns = () => {
 	btnPrint.removeAttribute('disabled');
 	sendBtn.removeAttribute('disabled');
 	getBtn.removeAttribute('disabled');
-
 };
 
 // already have/do not have an account buttons
@@ -145,38 +155,39 @@ linkToSignUp.addEventListener('click', () => {
 	signupBtn.click();
 });
 
-
-const changeLoggedColor = (user) => {
+export const changeLoggedColor = user => {
 	if (user) {
-		document.body.classList.add('loggedColor')
-		liItem.forEach(li => li.classList.add('loggedColor'))
+		document.body.classList.add('loggedColor');
+		liItem.forEach(li => li.classList.add('loggedColor'));
 	} else {
-		document.body.classList.remove('loggedColor')
-		liItem.forEach(li => li.classList.remove('loggedColor'))
+		document.body.classList.remove('loggedColor');
+		liItem.forEach(li => li.classList.remove('loggedColor'));
 	}
-}
+};
 
 // saving new shopping list
 const saveNewList = () => {
 	// deleting every document in forestore
-	db.collection(auth.currentUser.uid).get().then((querySnapshot) => {
-		const batch = db.batch()
-		querySnapshot.forEach(doc => {
-			batch.delete(doc.ref);
-		});
-		return batch.commit()
-		// seving new shopping list
-	})
+	db.collection(auth.currentUser.uid)
+		.get()
+		.then(querySnapshot => {
+			const batch = db.batch();
+			querySnapshot.forEach(doc => {
+				batch.delete(doc.ref);
+			});
+			return batch.commit();
+			// seving new shopping list
+		})
 		.then(() => {
 			products.forEach(product => {
-				db.collection(auth.currentUser.uid).add(Object.assign({}, product))
-			})
+				db.collection(auth.currentUser.uid).add(Object.assign({}, product));
+			});
 		})
-		.then(() => displayNotification())
-}
+		.then(() => displayNotification());
+};
 
 // buttons to fetch or localStorage
-const showFetchingBtns = (user) => {
+const showFetchingBtns = user => {
 	if (user) {
 		sendBtn.classList.remove('d-none');
 		getBtn.classList.remove('d-none');
@@ -189,38 +200,40 @@ const showFetchingBtns = (user) => {
 		saveBtn.classList.remove('d-none');
 		loadBtn.classList.remove('d-none');
 	}
-}
+};
 
 // fetch data from firestore
-const fetchList = (user) => {
+const fetchList = user => {
 	// to empty list before fetching
 	products.length = 0;
 	// set new list
-	db.collection(user.uid).get().then((querySnapshot) => {
-		querySnapshot.forEach((doc) => {
-			products.push(doc.data())
+	db.collection(user.uid)
+		.get()
+		.then(querySnapshot => {
+			querySnapshot.forEach(doc => {
+				products.push(doc.data());
+			});
 		})
-	}).then(() => {
-		renderList(products)
-		changeLoggedColor(user);
-	}
-	)
-}
+		.then(() => {
+			renderList(products);
+			changeLoggedColor(user);
+		});
+};
 
 // listen to user status
 auth.onAuthStateChanged(user => {
 	renderBtns();
 	if (user) {
-		getBtn.addEventListener('click', () => fetchList(user))
+		getBtn.addEventListener('click', () => fetchList(user));
 		// setting buttons
 		setupLoginBtns(user);
 		showFetchingBtns(user);
 		// rendering fetched list
-		fetchList(user)
+		fetchList(user);
 	} else {
 		setupLoginBtns();
-		changeLoggedColor()
-		showFetchingBtns()
-		readList()
+		changeLoggedColor();
+		showFetchingBtns();
+		readList();
 	}
 });
